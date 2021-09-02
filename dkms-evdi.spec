@@ -3,7 +3,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.9.1
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -12,8 +12,7 @@ BuildArch:  noarch
 Source0:    https://github.com/DisplayLink/%{dkms_name}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
-Patch0:     https://github.com/DisplayLink/%{dkms_name}/commit/0f1ad2153de1bc144f2359afa91fbe3fa07e9e7a.patch
-Patch1:     el8.patch
+Patch0:     evdi-module-git.patch
 
 BuildRequires:  sed
 
@@ -62,5 +61,8 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Thu Sep 02 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-2
+- Update with latest upstream patches.
+
 * Tue Apr 13 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-1
 - First build.
