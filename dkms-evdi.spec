@@ -3,7 +3,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.9.1
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -41,7 +41,7 @@ cp -fr module/* %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 
 %if 0%{?fedora}
 # Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/nvidia.conf
+install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
 %endif
 
 %post
@@ -57,10 +57,13 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
 %if 0%{?fedora}
-%{_sysconfdir}/dkms/nvidia.conf
+%{_sysconfdir}/dkms/%{dkms_name}.conf
 %endif
 
 %changelog
+* Fri Sep 03 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-3
+- Fix typo.
+
 * Thu Sep 02 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-2
 - Update with latest upstream patches.
 
