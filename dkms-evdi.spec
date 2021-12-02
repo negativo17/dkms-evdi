@@ -21,7 +21,6 @@ Source0:    https://github.com/DisplayLink/%{dkms_name}/archive/%{commit0}.tar.g
 %endif
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
-Patch0:     evdi-module-git.patch
 
 BuildRequires:  sed
 
