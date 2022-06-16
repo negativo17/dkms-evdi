@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.11.0
-Release:    1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:    2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -21,6 +21,9 @@ Source0:    https://github.com/DisplayLink/%{dkms_name}/archive/%{commit0}.tar.g
 %endif
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
+
+# https://github.com/DisplayLink/evdi/pull/364
+Patch0:         https://patch-diff.githubusercontent.com/raw/DisplayLink/evdi/pull/364.patch
 
 BuildRequires:  sed
 
@@ -73,6 +76,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Thu Jun 16 2022 Simone Caronni <negativo17@gmail.com> - 1.11.0-2.20220428git39da217
+- Add patch for CentOS/RHEL 8.6.
+
 * Sat Apr 30 2022 Simone Caronni <negativo17@gmail.com> - 1.11.0-1.20220428git39da217
 - Update to 1.11.0 snapshot.
 
