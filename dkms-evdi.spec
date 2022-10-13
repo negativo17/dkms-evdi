@@ -76,7 +76,7 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 * Thu Oct 13 2022 Simone Caronni <negativo17@gmail.com> - 1.12.0-2.20221013gitbdc258b
 - Update to latest snapshot.
 
-* Tue Aug 09 2022 Simone Caronni <negativo17@gmail.com> - 1:1.12.0-1.20220725gitb884877
+* Tue Aug 09 2022 Simone Caronni <negativo17@gmail.com> - 1.12.0-1.20220725gitb884877
 - Update to latest 1.12.0 snapshot.
 
 * Thu Jun 16 2022 Simone Caronni <negativo17@gmail.com> - 1.11.0-2.20220428git39da217
