@@ -1,5 +1,5 @@
-%global commit0 bdc258b25df4d00f222fde0e3c5003bf88ef17b5
-%global date 20221013
+%global commit0 64559211ec33390dbf4372e1029455ff58e0e739
+%global date 20230223
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global tag %{version}
 
@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.12.0
-Release:    2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:    3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -21,6 +21,8 @@ Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.g
 %endif
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
+
+Patch0:     %{dkms_name}-el.patch
 
 BuildRequires:  sed
 
@@ -73,6 +75,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Thu Mar 02 2023 Simone Caronni <negativo17@gmail.com> - 1.12.0-3.20230223git6455921
+- Fix build on latest EL 8/9 and Fedora kernels.
+
 * Thu Oct 13 2022 Simone Caronni <negativo17@gmail.com> - 1.12.0-2.20221013gitbdc258b
 - Update to latest snapshot.
 
