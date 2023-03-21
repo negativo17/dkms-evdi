@@ -22,6 +22,7 @@ Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.g
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
 
+# https://github.com/DisplayLink/evdi/pull/407
 Patch0:     %{dkms_name}-el.patch
 
 BuildRequires:  sed
