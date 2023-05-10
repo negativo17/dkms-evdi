@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.13.1
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -76,6 +76,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Wed May 10 2023 Simone Caronni <negativo17@gmail.com> - 1.13.1-2
+- Update EL patch.
+
 * Wed Mar 29 2023 Simone Caronni <negativo17@gmail.com> - 1.13.1-1
 - Update to 1.13.1.
 
