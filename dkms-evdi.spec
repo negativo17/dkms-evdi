@@ -21,7 +21,6 @@ Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.g
 %endif
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
-Patch0:     %{name}-dkms-only.patch
 
 BuildRequires:  sed
 
