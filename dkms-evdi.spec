@@ -1,14 +1,14 @@
-%global commit0 d21a6ea3c69ba180457966a04b6545d321cf46ca
-%global date 20240130
+%global commit0 eab561a9fe19d1bbc801dd1ec60e8b3318941be7
+%global date 20240726
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global tag %{version}
+#global tag %{version}
 
 %global debug_package %{nil}
 %global dkms_name evdi
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.5
-Release:    1%{?dist}
+Release:    2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -74,6 +74,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Mon Aug 12 2024 Simone Caronni <negativo17@gmail.com> - 1.14.5-2.20240726giteab561a
+- Update to latest snapshot to allow building on kernel 6.10.
+
 * Tue Jul 02 2024 Simone Caronni <negativo17@gmail.com> - 1.14.5-1
 - Update to 1.14.5.
 
