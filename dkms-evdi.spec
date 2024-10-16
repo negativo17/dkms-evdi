@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -57,14 +57,14 @@ install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.con
 %endif
 
 %post
-dkms add -m %{dkms_name} -v %{version} -q || :
+dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
 # Rebuild and make available for the currently running kernel:
 dkms build -m %{dkms_name} -v %{version} -q || :
 dkms install -m %{dkms_name} -v %{version} -q --force || :
 
 %preun
 # Remove all versions from DKMS registry:
-dkms remove -m %{dkms_name} -v %{version} -q --all || :
+dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
@@ -73,6 +73,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Wed Oct 16 2024 Simone Caronni <negativo17@gmail.com> - 1.14.7-2
+- Do not uninstall in preun scriptlet in case of an upgrade.
+
 * Sun Sep 29 2024 Simone Caronni <negativo17@gmail.com> - 1.14.7-1
 - Update to 1.14.7.
 
