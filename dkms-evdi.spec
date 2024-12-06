@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -21,6 +21,10 @@ Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.g
 %endif
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
+
+Patch0:     https://patch-diff.githubusercontent.com/raw/DisplayLink/evdi/pull/498.patch
+Patch1:     https://raw.githubusercontent.com/displaylink-rpm/displaylink-rpm/refs/heads/master/align-with-linux-v6.11-plus.patch
+Patch2:     https://raw.githubusercontent.com/displaylink-rpm/displaylink-rpm/refs/heads/master/el9_5-build-fixes-and-el-audit-updates.patch
 
 BuildRequires:  sed
 
@@ -73,6 +77,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %endif
 
 %changelog
+* Fri Dec 06 2024 Simone Caronni <negativo17@gmail.com> - 1.14.7-3
+- Add kernel 6.12 & EL 9.5 patches.
+- Trim changelog.
+
 * Wed Oct 16 2024 Simone Caronni <negativo17@gmail.com> - 1.14.7-2
 - Do not uninstall in preun scriptlet in case of an upgrade.
 
@@ -99,57 +107,3 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 
 * Mon Jan 08 2024 Simone Caronni <negativo17@gmail.com> - 1.14.1-4.20240104git0313eca
 - Update to latest snapshot.
-
-* Mon Nov 27 2023 Simone Caronni <negativo17@gmail.com> - 1.14.1-3.20231123gita943d98
-- Switch to snapshot which include build fixes for latest kernels.
-
-* Mon Nov 20 2023 Simone Caronni <negativo17@gmail.com> - 1.14.1-2
-- Add patch for 6.6 kernel.
-
-* Wed Aug 23 2023 Simone Caronni <negativo17@gmail.com> - 1.14.1-1
-- Update to 1.14.1.
-
-* Fri Jun 02 2023 Simone Caronni <negativo17@gmail.com> - 1.14.0-1
-- Update to 1.14.0.
-
-* Wed May 10 2023 Simone Caronni <negativo17@gmail.com> - 1.13.1-2
-- Update EL patch.
-
-* Wed Mar 29 2023 Simone Caronni <negativo17@gmail.com> - 1.13.1-1
-- Update to 1.13.1.
-
-* Fri Mar 17 2023 Simone Caronni <negativo17@gmail.com> - 1.13.0-1
-- Update to 1.13.0.
-
-* Thu Mar 02 2023 Simone Caronni <negativo17@gmail.com> - 1.12.0-3.20230223git6455921
-- Fix build on latest EL 8/9 and Fedora kernels.
-
-* Thu Oct 13 2022 Simone Caronni <negativo17@gmail.com> - 1.12.0-2.20221013gitbdc258b
-- Update to latest snapshot.
-
-* Tue Aug 09 2022 Simone Caronni <negativo17@gmail.com> - 1.12.0-1.20220725gitb884877
-- Update to latest 1.12.0 snapshot.
-
-* Thu Jun 16 2022 Simone Caronni <negativo17@gmail.com> - 1.11.0-2.20220428git39da217
-- Add patch for CentOS/RHEL 8.6.
-
-* Sat Apr 30 2022 Simone Caronni <negativo17@gmail.com> - 1.11.0-1.20220428git39da217
-- Update to 1.11.0 snapshot.
-
-* Thu Mar 03 2022 Simone Caronni <negativo17@gmail.com> - 1.10.1-1
-- Update to 1.10.1.
-
-* Fri Jan 21 2022 Simone Caronni <negativo17@gmail.com> - 1.10.0-1.20220104gitaef6790
-- Update to 1.10.0 plus latest commits.
-
-* Thu Dec 02 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-4.20211202gitd6b2841
-- Update to latest snapshot.
-
-* Fri Sep 03 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-3
-- Fix typo.
-
-* Thu Sep 02 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-2
-- Update with latest upstream patches.
-
-* Tue Apr 13 2021 Simone Caronni <negativo17@gmail.com> - 1.9.1-1
-- First build.
