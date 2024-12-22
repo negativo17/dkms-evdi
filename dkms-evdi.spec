@@ -7,8 +7,8 @@
 %global dkms_name evdi
 
 Name:       dkms-%{dkms_name}
-Version:    1.14.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:    3%{?dist}
+Version:    1.14.8%{!?tag:^%{date}git%{shortcommit0}}
+Release:    1%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -21,10 +21,6 @@ Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.g
 %endif
 Source1:    %{name}.conf
 Source2:    dkms-no-weak-modules.conf
-
-Patch0:     https://patch-diff.githubusercontent.com/raw/DisplayLink/evdi/pull/498.patch
-Patch1:     https://raw.githubusercontent.com/displaylink-rpm/displaylink-rpm/refs/heads/master/align-with-linux-v6.11-plus.patch
-Patch2:     https://raw.githubusercontent.com/displaylink-rpm/displaylink-rpm/refs/heads/master/el9_5-build-fixes-and-el-audit-updates.patch
 
 BuildRequires:  sed
 
@@ -77,6 +73,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %endif
 
 %changelog
+* Sun Dec 22 2024 Simone Caronni <negativo17@gmail.com> - 1.14.8-1
+- Update to 1.14.8.
+
 * Fri Dec 06 2024 Simone Caronni <negativo17@gmail.com> - 1.14.7-3
 - Add kernel 6.12 & EL 9.5 patches.
 - Trim changelog.
