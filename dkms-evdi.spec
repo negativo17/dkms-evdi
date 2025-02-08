@@ -8,7 +8,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.8%{!?tag:^%{date}git%{shortcommit0}}
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -20,7 +20,6 @@ Source0:    %{url}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.gz
 %endif
 Source1:    %{name}.conf
-Source2:    dkms-no-weak-modules.conf
 
 BuildRequires:  sed
 
@@ -40,8 +39,6 @@ become available.
 %autosetup -p1 -n %{dkms_name}-%{commit0}
 %endif
 
-cp -f %{SOURCE1} module/dkms.conf
-
 sed -i -e 's/__VERSION_STRING/%{version}/g' module/dkms.conf
 
 %build
@@ -50,11 +47,6 @@ sed -i -e 's/__VERSION_STRING/%{version}/g' module/dkms.conf
 # Create empty tree:
 mkdir -p %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 cp -fr module/* %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
-
-%if 0%{?fedora}
-# Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
-%endif
 
 %post
 dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
@@ -68,11 +60,12 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
-%if 0%{?fedora}
-%{_sysconfdir}/dkms/%{dkms_name}.conf
-%endif
 
 %changelog
+* Sat Feb 08 2025 Simone Caronni <negativo17@gmail.com> - 1.14.8-2
+- Simplify DKMS configuration.
+- Do not set NO_WEAK_MODULES on Fedora, it does not have kABI support.
+
 * Sun Dec 22 2024 Simone Caronni <negativo17@gmail.com> - 1.14.8-1
 - Update to 1.14.8.
 
