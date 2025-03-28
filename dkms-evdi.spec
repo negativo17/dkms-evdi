@@ -7,8 +7,8 @@
 %global dkms_name evdi
 
 Name:       dkms-%{dkms_name}
-Version:    1.14.8%{!?tag:^%{date}git%{shortcommit0}}
-Release:    2%{?dist}
+Version:    1.14.9%{!?tag:^%{date}git%{shortcommit0}}
+Release:    1%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -62,6 +62,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Fri Mar 28 2025 Simone Caronni <negativo17@gmail.com> - 1.14.9-1
+- Update to 1.14.9.
+
 * Sat Feb 08 2025 Simone Caronni <negativo17@gmail.com> - 1.14.8-2
 - Simplify DKMS configuration.
 - Do not set NO_WEAK_MODULES on Fedora, it does not have kABI support.
