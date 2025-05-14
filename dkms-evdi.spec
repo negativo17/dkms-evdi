@@ -1,24 +1,15 @@
-%global commit0 eab561a9fe19d1bbc801dd1ec60e8b3318941be7
-%global date 20240726
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global tag %{version}
-
 %global debug_package %{nil}
 %global dkms_name evdi
 
 Name:       dkms-%{dkms_name}
-Version:    1.14.9%{!?tag:^%{date}git%{shortcommit0}}
+Version:    1.14.10
 Release:    1%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
 BuildArch:  noarch
 
-%if 0%{?tag:1}
 Source0:    %{url}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
-%else
-Source0:    %{url}/archive/%{commit0}.tar.gz#/%{dkms_name}-%{shortcommit0}.tar.gz
-%endif
 Source1:    %{name}.conf
 
 BuildRequires:  sed
@@ -33,11 +24,7 @@ The modules are rebuilt through the DKMS system when a new kernel or modules
 become available.
 
 %prep
-%if 0%{?tag:1}
 %autosetup -p1 -n %{dkms_name}-%{version}
-%else
-%autosetup -p1 -n %{dkms_name}-%{commit0}
-%endif
 
 sed -i -e 's/__VERSION_STRING/%{version}/g' module/dkms.conf
 
@@ -62,6 +49,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Wed May 14 2025 Simone Caronni <negativo17@gmail.com> - 1.14.10-1
+- Update to 1.14.10.
+
 * Fri Mar 28 2025 Simone Caronni <negativo17@gmail.com> - 1.14.9-1
 - Update to 1.14.9.
 
