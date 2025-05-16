@@ -11,6 +11,7 @@ BuildArch:  noarch
 
 Source0:    %{url}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source1:    %{name}.conf
+Patch0:     https://github.com/DisplayLink/evdi/pull/517.patch
 
 BuildRequires:  sed
 
