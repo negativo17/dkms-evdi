@@ -11,8 +11,10 @@ BuildArch:  noarch
 
 Source0:    %{url}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source1:    %{name}.conf
-Patch0:         https://github.com/DisplayLink/evdi/commit/ae34f70a02552b41697ba753323427281e977e17.patch
-Patch1:         https://github.com/DisplayLink/evdi/commit/3673a4b34d386921fc323ddbd2ef0e000022e2d4.patch
+Patch0:     https://github.com/DisplayLink/evdi/commit/ae34f70a02552b41697ba753323427281e977e17.patch
+Patch1:     https://github.com/DisplayLink/evdi/commit/3673a4b34d386921fc323ddbd2ef0e000022e2d4.patch
+# Required for CentOS Stream (10.1), not required for 10.0:
+Patch2:     0001-Revert-CentOS-Stream-10-change.patch
 
 BuildRequires:  sed
 
