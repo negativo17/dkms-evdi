@@ -3,7 +3,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.10
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -53,6 +53,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Thu Jun 19 2025 Simone Caronni <negativo17@gmail.com> - 1.14.10-4
+- Revert change that works for CentOS Stream (10.1) but not for EL (10.0).
+
 * Wed May 21 2025 Simone Caronni <negativo17@gmail.com> - 1.14.10-3
 - Add upstream patches.
 
