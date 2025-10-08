@@ -3,7 +3,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.11
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -40,8 +40,8 @@ cp -fr module/* %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 %post
 dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
 # Rebuild and make available for the currently running kernel:
-dkms build -m %{dkms_name} -v %{version} -q || :
-dkms install -m %{dkms_name} -v %{version} -q --force || :
+dkms build -m %{dkms_name} -v %{version} -q --force
+dkms install -m %{dkms_name} -v %{version} -q --force
 
 %preun
 # Remove all versions from DKMS registry:
@@ -51,6 +51,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Wed Oct 08 2025 Simone Caronni <negativo17@gmail.com> - 1.14.11-2
+- Fix modules not getting rebuilt when reinstalling package.
+- Do not filter out as success module build steps.
+
 * Tue Sep 02 2025 Simone Caronni <negativo17@gmail.com> - 1.14.11-1
 - Update to 1.14.11.
 
