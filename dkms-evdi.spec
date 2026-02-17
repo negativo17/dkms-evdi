@@ -3,7 +3,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    1.14.14
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -11,6 +11,7 @@ BuildArch:  noarch
 
 Source0:    %{url}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source1:    %{name}.conf
+Patch0:     https://github.com/DisplayLink/evdi/commit/c88fb924d4b1581d874f2786c9b62feef078a4e1.patch
 
 BuildRequires:  sed
 
@@ -49,6 +50,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue Feb 17 2026 Simone Caronni <negativo17@gmail.com> - 1.14.14-2
+- Fix build on aarch64.
+
 * Mon Feb 09 2026 Simone Caronni <negativo17@gmail.com> - 1.14.14-1
 - Update to 1.14.14.
 
