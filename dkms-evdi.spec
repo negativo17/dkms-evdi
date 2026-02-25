@@ -2,8 +2,8 @@
 %global dkms_name evdi
 
 Name:       dkms-%{dkms_name}
-Version:    1.14.14
-Release:    2%{?dist}
+Version:    1.14.15
+Release:    1%{?dist}
 Summary:    DisplayLink VGA/HDMI display driver kernel module
 License:    GPLv2
 URL:        https://github.com/DisplayLink/evdi
@@ -50,6 +50,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Wed Feb 25 2026 Simone Caronni <negativo17@gmail.com> - 1.14.15-1
+- Update to 1.14.15.
+
 * Tue Feb 17 2026 Simone Caronni <negativo17@gmail.com> - 1.14.14-2
 - Fix build on aarch64.
 
