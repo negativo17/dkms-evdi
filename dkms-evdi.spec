@@ -11,7 +11,6 @@ BuildArch:  noarch
 
 Source0:    %{url}/archive/v%{version}.tar.gz#/%{dkms_name}-%{version}.tar.gz
 Source1:    %{name}.conf
-Patch0:     https://github.com/DisplayLink/evdi/commit/c88fb924d4b1581d874f2786c9b62feef078a4e1.patch
 
 BuildRequires:  sed
 
